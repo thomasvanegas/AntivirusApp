@@ -24,9 +24,10 @@ public class Analizador {
     
     
     // Métodos de la clase
-    private void analizarArchivo () {
-    
+    private boolean analizarArchivo () {
+        
         // Implementación del método
+        return true;
         
     }
     
