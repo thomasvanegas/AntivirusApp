@@ -1,20 +1,33 @@
 package Vista;
 
+/* Importación de librerias/dependencias */
 import javax.swing.*;
+import Controladores.AdministradorArchivos;
+import Controladores.Analizador;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.*;
 
 /**
  *
- * @author LENOVO
+ * @author THOMAS CAMILO VANEGAS ACEVEDO; ID:000287437
+ * 
  */
 
 public class AntivirusAppHome extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AntivirusAppHome
-     */
+    
+    private File archivo;
+    private byte[] bytesArchivo;
     
     public AntivirusAppHome() {
+        
+        /* Ejecutando el método initComponents */
         initComponents();
+
+        // Método que permite que el JFrame se inicie en el centro de la pantalla
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -31,15 +44,20 @@ public class AntivirusAppHome extends javax.swing.JFrame {
         LblSeleccionarArchivoAnalizar = new javax.swing.JLabel();
         InputArchivo = new javax.swing.JTextField();
         BtnAnalizarArchivo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        LblContenidoArchivoBytes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TextAreaContenidoBytes = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         BtnBucarArchivo = new javax.swing.JButton();
         BtnMostrarAutomata = new javax.swing.JButton();
+        Separator1 = new javax.swing.JSeparator();
+        Separator2 = new javax.swing.JSeparator();
+        Separator3 = new javax.swing.JSeparator();
+        Separator4 = new javax.swing.JSeparator();
+        BtnSalirApp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,17 +81,21 @@ public class AntivirusAppHome extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("El Contenido de su Archivo en Bytes es");
+        LblContenidoArchivoBytes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblContenidoArchivoBytes.setText("Contenido de su Archivo en Bytes");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        TextAreaContenidoBytes.setColumns(20);
+        TextAreaContenidoBytes.setRows(5);
+        jScrollPane1.setViewportView(TextAreaContenidoBytes);
 
-        jLabel2.setText("Nombre del Archivo:");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Nombre del Archivo");
 
-        jLabel3.setText("Estado del Autómata Finito:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Estado del Autómata Finito");
 
-        jLabel4.setText("Resultado del Análisis Es:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Resultado del Análisis");
 
         BtnBucarArchivo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         BtnBucarArchivo.setText("Buscar Archivo a Analizar");
@@ -83,10 +105,32 @@ public class AntivirusAppHome extends javax.swing.JFrame {
             }
         });
 
-        BtnMostrarAutomata.setText("Mostrar Automata");
+        BtnMostrarAutomata.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnMostrarAutomata.setText("Mostrar Diseño Automata");
         BtnMostrarAutomata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMostrarAutomataActionPerformed(evt);
+            }
+        });
+
+        Separator1.setBackground(new java.awt.Color(0, 0, 0));
+        Separator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        Separator2.setBackground(new java.awt.Color(0, 0, 0));
+        Separator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        Separator3.setBackground(new java.awt.Color(0, 0, 0));
+        Separator3.setForeground(new java.awt.Color(0, 0, 0));
+
+        Separator4.setBackground(new java.awt.Color(0, 0, 0));
+        Separator4.setForeground(new java.awt.Color(0, 0, 0));
+
+        BtnSalirApp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnSalirApp.setForeground(new java.awt.Color(255, 0, 0));
+        BtnSalirApp.setText("SALIR DE LA APP");
+        BtnSalirApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirAppActionPerformed(evt);
             }
         });
 
@@ -94,84 +138,99 @@ public class AntivirusAppHome extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(BtnAnalizarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(147, 147, 147))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(142, 142, 142))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(BtnMostrarAutomata)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(27, 27, 27)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(LblTitleDetectorVirus)
-                                            .addGap(173, 173, 173))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(LblSeleccionarArchivoAnalizar)
-                                            .addGap(138, 138, 138))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(BtnBucarArchivo)
-                                    .addComponent(InputArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(17, 17, 17)))))
+            .addComponent(Separator1)
+            .addComponent(Separator2)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
+                        .addGap(434, 434, 434)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel2)))
+                        .addGap(240, 240, 240)
+                        .addComponent(LblTitleDetectorVirus))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(BtnMostrarAutomata))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(BtnSalirApp)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Separator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Separator4))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 56, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(InputArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtnBucarArchivo))
+                                .addGap(157, 157, 157))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(LblSeleccionarArchivoAnalizar)
+                                .addGap(180, 180, 180))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(LblContenidoArchivoBytes)
+                                .addGap(174, 174, 174))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(208, 208, 208))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(206, 206, 206))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(181, 181, 181))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(BtnAnalizarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(181, 181, 181))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LblTitleDetectorVirus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(LblSeleccionarArchivoAnalizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(InputArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnBucarArchivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnBucarArchivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BtnMostrarAutomata)
-                        .addGap(29, 29, 29)))
-                .addComponent(jLabel1)
+                .addComponent(LblContenidoArchivoBytes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Separator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(BtnAnalizarArchivo)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Separator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnMostrarAutomata)
+                .addGap(18, 18, 18)
+                .addComponent(Separator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnSalirApp)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -181,33 +240,70 @@ public class AntivirusAppHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_InputArchivoActionPerformed
 
+    
+    
+    
+    
+    
+    // BOTÓN ANALIZAR ARCHIVO
     private void BtnAnalizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnalizarArchivoActionPerformed
-        // TODO add your handling code here:
+        
+        Analizador analizador = new Analizador(bytesArchivo);
+        
+        
+        
     }//GEN-LAST:event_BtnAnalizarArchivoActionPerformed
 
+    
+    
+    
+    
+    
     private void BtnBucarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBucarArchivoActionPerformed
 
         // Instanciando la Clase JFileChooser;
         JFileChooser exploradorArchivos = new JFileChooser();
-
+        
+        String cadenaBytesArchivo = "";
+        
         // Invocando el método showOpenDialog para abrir el buscador de archivos.
         exploradorArchivos.showOpenDialog(this);
-        
         // Obteniedo la ruta para insertarse en el InputFile
         InputArchivo.setText(exploradorArchivos.getSelectedFile().toPath().toString());
+        
+        try {
+            AdministradorArchivos administrador = new AdministradorArchivos(exploradorArchivos.getSelectedFile());
+            
+            bytesArchivo = administrador.getBytesArchivo();
+            
+            // Se recorre el array bytesArchivo para insertarlo en una cadena.
+            for (int i = 0; i < bytesArchivo.length; i++) {
+                
+                cadenaBytesArchivo = cadenaBytesArchivo + bytesArchivo[i] + " ";
+            
+            }
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AntivirusAppHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        TextAreaContenidoBytes.setText(cadenaBytesArchivo);
+        
+        
     }//GEN-LAST:event_BtnBucarArchivoActionPerformed
 
     private void BtnMostrarAutomataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMostrarAutomataActionPerformed
         
-        /* El siguiente códido sobreescribe el JFrame, sin embargo, no es funcional
-        
-        ImageIcon automata = new ImageIcon(getClass().getClassLoader().getResource("finitine-automata-design/virus-automata-design-image.jpg"));
-        BtnMostrarAutomata.setIcon(automata);
-
-        */
+        MostrarDisenoAutomata disenoAutomata = new MostrarDisenoAutomata();
+        disenoAutomata.setVisible(true);
         
     }//GEN-LAST:event_BtnMostrarAutomataActionPerformed
 
+    private void BtnSalirAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirAppActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSalirAppActionPerformed
+   
     /**
      * @param args the command line arguments
      */
@@ -239,6 +335,7 @@ public class AntivirusAppHome extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AntivirusAppHome().setVisible(true);
+                
             }
         });
     }
@@ -247,15 +344,20 @@ public class AntivirusAppHome extends javax.swing.JFrame {
     private javax.swing.JButton BtnAnalizarArchivo;
     private javax.swing.JButton BtnBucarArchivo;
     private javax.swing.JButton BtnMostrarAutomata;
+    private javax.swing.JButton BtnSalirApp;
     private javax.swing.JTextField InputArchivo;
+    private javax.swing.JLabel LblContenidoArchivoBytes;
     private javax.swing.JLabel LblSeleccionarArchivoAnalizar;
     private javax.swing.JLabel LblTitleDetectorVirus;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator Separator1;
+    private javax.swing.JSeparator Separator2;
+    private javax.swing.JSeparator Separator3;
+    private javax.swing.JSeparator Separator4;
+    private javax.swing.JTextArea TextAreaContenidoBytes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
