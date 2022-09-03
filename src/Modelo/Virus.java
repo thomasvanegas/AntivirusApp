@@ -12,14 +12,12 @@ public class Virus {
     
     // Método Constructor
     public Virus (String nombreVirus, byte[] secuenciaVirus){
-    
         this.nombreVirus = nombreVirus;
         this.secuenciaVirus = secuenciaVirus;
     }
     
-    // Métodos Getters y Setters de la Clase
-    public String getNombreVirus(){
-    
+    // Métodos de acceso (accesores) Getters de la Clase
+    public String getNombreVirus(){    
         return this.nombreVirus;
     }
     
